@@ -19,7 +19,6 @@ $selectClient = SelectUser($pdo);
                     <li class="nav-item"><a class="nav-link" href="/categories/show_categories.php">Категории</a></li>
                     <li class="nav-item"><a class="nav-link" href="/product/show_product.php">Продукты</a></li>
                     <li class="nav-item"><a class="nav-link" href="/customers/show_customer.php">Пользователи</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/logic/logic.php">Аналитика</a></li>
                 </ul>
             </div>
         </div>
@@ -42,7 +41,6 @@ $selectClient = SelectUser($pdo);
         <th >имя</th>
         <th>почта</th>
         <th>телефон</th>
-        <th>пароль</th>
         <th>роль</th>
         <th>Действие</th>
     </tr>
@@ -54,7 +52,6 @@ $selectClient = SelectUser($pdo);
             <td><?php echo $client['name'] ?></td>
             <td><?php echo$client['email'] ?></td>
             <td><?php echo $client['phone'] ?></td>
-            <td><?php echo $client['password'] ?></td>
             <td><?php echo$client['role'] ?></td>
             <th>
                 <a href="/customers/delete_customer.php?id=<?php echo $client['id'] ?>">Удалить</a>

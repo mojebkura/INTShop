@@ -11,7 +11,7 @@ $password_confirm = $_POST['password_confirm'];
 $role  = 'User';
 $is_blocked   = 0;
 
-if ($name === '' || $email === '' || $password === '') {
+if (!$name  || !$email  || !$password) {
     $_SESSION['msg_error'] = 'Заполните все обязательные поля';
     header('Location: registration.php');
     exit;

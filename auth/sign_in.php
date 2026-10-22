@@ -50,7 +50,7 @@ $role = $_SESSION['Clients']['role'];
                 <li class="nav-item"><a class="nav-link" href="/categories/show_categories.php">Категории</a></li>
                 <li class="nav-item"><a class="nav-link" href="/product/show_product.php">Продукты</a></li>
                 <li class="nav-item"><a class="nav-link" href="/customers/show_customer.php">Пользователи</a></li>
-                <li class="nav-item"><a class="nav-link" href="/logic/logic.php">Аналитика</a></li>
+    
             </ul>
         </div>
     </div>

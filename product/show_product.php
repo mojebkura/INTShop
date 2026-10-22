@@ -30,7 +30,6 @@ $categorytable = SelectCategory($pdo);
                 <li class="nav-item"><a class="nav-link" href="/categories/show_categories.php">Категории</a></li>
                 <li class="nav-item"><a class="nav-link" href="/product/show_product.php">Продукты</a></li>
                 <li class="nav-item"><a class="nav-link" href="/customers/show_customer.php">Пользователи</a></li>
-                <li class="nav-item"><a class="nav-link" href="/logic/logic.php">Аналитика</a></li>
             </ul>
         </div>
     </div>
@@ -43,7 +42,7 @@ $categorytable = SelectCategory($pdo);
     <table class="table">
         <thead>
         <tr>
-            <th>id</th>
+            <!-- <th>id</th> -->
             <th>название</th>
             <th>цена(руб)</th>
             <th>кол-во</th>
@@ -55,7 +54,7 @@ $categorytable = SelectCategory($pdo);
         <?php foreach ($Producttable as $product): ?>
             <?php $category = getCategoryById($pdo, $product['category_id']); ?>
             <tr>
-                <td><?php echo $product['id']; ?></td>
+                <!-- <td><?php echo $product['id']; ?></td> -->
                 <td><?php echo $product['name']; ?></td>
                 <td><?php echo $product['price']; ?></td>
                 <td><?php echo $product['remains']; ?></td>

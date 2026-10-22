@@ -6,15 +6,15 @@ require_once __DIR__ . '/../db.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {$client_id  = $_POST['client_id'];
     $product_id = $_POST['product_id'];
     $total_amount = $_POST['total_amount'];
-    $status = $_POST['status'] ?? 'paid';
+    $status = $_POST['status'];
 
-     {
-        if (AddOrder($pdo, $client_id, $product_id, $total_amount, $status)) {
-            $_SESSION['message_success'] = 'Заказ добавлен';
-            header('Location: show_order.php');
-            exit;
-        }
-        $_SESSION['msg_error'] = 'Не удалось добавить заказ';
+    {
+    if (AddOrder($pdo, $client_id, $product_id, $total_amount, $status)) {
+        $_SESSION['message_success'] = 'Заказ добавлен';
+        header('Location: show_order.php');
+        exit;
+    }
+    $_SESSION['msg_error'] = 'Не удалось добавить заказ';
     }
 }
 

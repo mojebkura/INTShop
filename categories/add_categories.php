@@ -7,7 +7,7 @@ require_once __DIR__ . '/../db.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $category = $_POST['category'];
 
-    if ($category === '') {
+    if (!$category) {
         $_SESSION['msg_error'] = 'Введите название категории';
         header('Location: add_categories.php');
         exit;

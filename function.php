@@ -30,9 +30,9 @@ function AddProduct($pdo, $name, $price, $remains, $category_id) {
             VALUES (:name, :price, :remains, :category_id)";
     $stmt = $pdo->prepare($sql);
     return $stmt->execute([
-            ':name'        => $name,
-            ':price'       => $price,
-            ':remains'     => $remains,
+            ':name' => $name,
+            ':price'  => $price,
+            ':remains' => $remains,
             ':category_id' => $category_id
     ]);
 }
@@ -60,10 +60,10 @@ function UpdateProduct($pdo, $id, $name, $price, $remains, $category_id) {
             WHERE id = :id";
     $stmt = $pdo->prepare($sql);
     return $stmt->execute([
-            ':id'          => $id,
-            ':name'        => $name,
-            ':price'       => $price,
-            ':remains'     => $remains,
+            ':id' => $id,
+            ':name' => $name,
+            ':price' => $price,
+            ':remains' => $remains,
             ':category_id' => $category_id
     ]);
 }
@@ -197,31 +197,31 @@ function DeleteOrder($pdo, $id) {
     return $stmt->execute([':id' => $id]);
 };
 
-function TotalMoney($pdo) {
-    $sql = "SELECT SUM(total_amount) FROM Orders";
-    $stmt = $pdo->query($sql);
-    return $stmt->fetchColumn() ?: 0;
-};
-function PopularCategory($pdo) {
-    $sql = "SELECT Product_category.category AS category_name, COUNT(Orders.id) AS order_count
-            FROM Orders
-            JOIN Product ON Product.id = Orders.product_id
-            JOIN Product_category ON Product_category.id = Product.category_id
-            GROUP BY Product_category.id, Product_category.category
-            ORDER BY order_count DESC
-            LIMIT 1";
-    $stmt = $pdo->query($sql);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-};
+// function TotalMoney($pdo) {
+//     $sql = "SELECT SUM(total_amount) FROM Orders";
+//     $stmt = $pdo->query($sql);
+//     return $stmt->fetchColumn() ?: 0;
+// };
+// function PopularCategory($pdo) {
+//     $sql = "SELECT Product_category.category AS category_name, COUNT(Orders.id) AS order_count
+//             FROM Orders
+//             JOIN Product ON Product.id = Orders.product_id
+//             JOIN Product_category ON Product_category.id = Product.category_id
+//             GROUP BY Product_category.id, Product_category.category
+//             ORDER BY order_count DESC
+//             LIMIT 1";
+//     $stmt = $pdo->query($sql);
+//     return $stmt->fetch(PDO::FETCH_ASSOC);
+// };
 
-function PopularProduct($pdo) {
-    $sql = "SELECT Product.name AS product_name, COUNT(Orders.id) AS order_count
-            FROM Order
-            JOIN Product ON Product.id = Orders.product_id
-            GROUP BY Product.id, Product.name
-            ORDER BY order_count DESC
-            LIMIT 1";
-    $stmt = $pdo->query($sql);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-};
+// function PopularProduct($pdo) {
+//     $sql = "SELECT Product.name AS product_name, COUNT(Orders.id) AS order_count
+//             FROM Order
+//             JOIN Product ON Product.id = Orders.product_id
+//             GROUP BY Product.id, Product.name
+//             ORDER BY order_count DESC
+//             LIMIT 1";
+//     $stmt = $pdo->query($sql);
+//     return $stmt->fetch(PDO::FETCH_ASSOC);
+// };
 

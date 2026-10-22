@@ -26,11 +26,11 @@ require_once __DIR__ . '/../function.php';
 
     <?php
     if (!empty($_SESSION['msg_error'])) {
-        echo '<a>' . ($_SESSION['msg_error']) . '</a>';
+        echo '<p>' . ($_SESSION['msg_error']) . '</p>';
         unset($_SESSION['msg_error']);
     }
     if (!empty($_SESSION['message_success'])) {
-        echo '<a>' . ($_SESSION['message_success']) . '</a>';
+        echo '<p>' . ($_SESSION['message_success']) . '</p>';
         unset($_SESSION['message_success']);
     }
     ?>
