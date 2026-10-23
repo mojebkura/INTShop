@@ -39,13 +39,14 @@ $orders = SelectOrders($pdo);
 <table class="table">
     <thead>
     <tr>
-        <th>id</th>
-        <th>клиент</th>
-        <th>товар</th>
-        <th>время</th>
-        <th>сумма(руб)</th>
-        <th>статус</th>
-        <th>действия</th>
+        <th>id|</th>
+        <th>клиент|</th>
+        <th>товар|</th>
+        <th>время|</th>
+        <th>сумма(руб)|</th>
+        <th>статус|</th>
+        <th>количество|</th>
+        <th>действия|</th>
     </tr>
     </thead>
     <tbody>
@@ -57,8 +58,10 @@ $orders = SelectOrders($pdo);
             <td><?php echo $order['created_at']; ?></td>
             <td><?php echo $order['total_amount']; ?></td>
             <td><?php echo $order['status']; ?></td>
+            <td><?php echo $order['quantity']; ?></td>
             <td>
-                <a href="delete_order.php?id=<?php echo $order['id']; ?>">Удалить</a>
+                <a href="edit_order.php?id=<?php echo $order['id']; ?>" class="btn btn-sm btn-primary">Редактировать</a>
+                <a href="delete_order.php?id=<?php echo $order['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Вы уверены?')">Удалить</a>
             </td>
         </tr>
     <?php endforeach; ?>

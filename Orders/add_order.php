@@ -3,13 +3,16 @@ session_start();
 require_once __DIR__ . '/../function.php';
 require_once __DIR__ . '/../db.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {$client_id  = $_POST['client_id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {    
+    $client_id  = $_POST['client_id'];
     $product_id = $_POST['product_id'];
     $total_amount = $_POST['total_amount'];
+    $quantity = $_POST['quantity'];
     $status = $_POST['status'];
+    
 
     {
-    if (AddOrder($pdo, $client_id, $product_id, $total_amount, $status)) {
+    if (AddOrder($pdo, $client_id, $product_id, $total_amount,$quantity, $status)) {
         $_SESSION['message_success'] = 'Заказ добавлен';
         header('Location: show_order.php');
         exit;
@@ -56,6 +59,8 @@ $productiv = SelectProduct($pdo);
         <option value="shipped">Отправленный</option>
         <option value="completed">Заказ закрыт</option>
     </select><br><br>
+        <label>Количество</label><br>
+    <input type="number" step="1" name="quantity" required><br><br>
     <button type="submit">Сохранить</button>
     <a href="show_order.php">Назад</a>
 </form>

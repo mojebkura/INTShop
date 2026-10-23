@@ -148,15 +148,16 @@ function getCategoryById($pdo, $id) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 };
 //______________заказы________________
-function AddOrder($pdo, $client_id, $product_id, $total_amount, $status = 'paid') {
-    $sql = "INSERT INTO Orders(client_id, product_id, total_amount, status)
-            VALUES (:client_id, :product_id, :total_amount, :status)";
+function AddOrder($pdo, $client_id, $product_id, $total_amount, $status = 'paid',$quantity) {
+    $sql = "INSERT INTO Orders(client_id, product_id, total_amount,status,quantity)
+            VALUES (:client_id, :product_id, :total_amount, :status,:quantity)";
     $stmt = $pdo->prepare($sql);
     return $stmt->execute([
         ':client_id'    => $client_id,
         ':product_id'   => $product_id,
         ':total_amount' => $total_amount,
-        ':status'       => $status
+        ':status'       => $status,
+        ':quantity'     => $quantity
     ]);
 }
 function SelectOrders($pdo) {
@@ -177,18 +178,20 @@ function SelectOrders($pdo) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-function UpdateOrder($pdo, $id, $client_id, $total_amount, $status) {
+function UpdateOrder($pdo, $id, $client_id, $total_amount, $status,$quantity) {
     $sql = "UPDATE Orders
             SET client_id    = :client_id,
                 total_amount = :total_amount,
-                status       = :status
+                status       = :status,
+                quantiy      = :quantity
             WHERE id = :id";
     $stmt = $pdo->prepare($sql);
     return $stmt->execute([
         ':id'           => $id,
         ':client_id'    => $client_id,
         ':total_amount' => $total_amount,
-        ':status'       => $status
+        ':status'       => $status,
+        ':quantity'    =>  $quantity
     ]);
 };
 function DeleteOrder($pdo, $id) {
@@ -197,31 +200,38 @@ function DeleteOrder($pdo, $id) {
     return $stmt->execute([':id' => $id]);
 };
 
-// function TotalMoney($pdo) {
-//     $sql = "SELECT SUM(total_amount) FROM Orders";
-//     $stmt = $pdo->query($sql);
-//     return $stmt->fetchColumn() ?: 0;
-// };
-// function PopularCategory($pdo) {
-//     $sql = "SELECT Product_category.category AS category_name, COUNT(Orders.id) AS order_count
-//             FROM Orders
-//             JOIN Product ON Product.id = Orders.product_id
-//             JOIN Product_category ON Product_category.id = Product.category_id
-//             GROUP BY Product_category.id, Product_category.category
-//             ORDER BY order_count DESC
-//             LIMIT 1";
-//     $stmt = $pdo->query($sql);
-//     return $stmt->fetch(PDO::FETCH_ASSOC);
-// };
+function getOrderbyId($pdo, $id){
+    $sql = "SELECT * FROM Orders WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':id' => $id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
-// function PopularProduct($pdo) {
-//     $sql = "SELECT Product.name AS product_name, COUNT(Orders.id) AS order_count
-//             FROM Order
-//             JOIN Product ON Product.id = Orders.product_id
-//             GROUP BY Product.id, Product.name
-//             ORDER BY order_count DESC
-//             LIMIT 1";
-//     $stmt = $pdo->query($sql);
-//     return $stmt->fetch(PDO::FETCH_ASSOC);
-// };
+function TotalMoney($pdo) {
+    $sql = "SELECT SUM(total_amount) FROM Orders";
+    $stmt = $pdo->query($sql);
+    return $stmt->fetchColumn() ?: 0;
+};
+function PopularCategory($pdo) {
+    $sql = "SELECT Product_category.category AS category_name, COUNT(Orders.id) AS order_count
+            FROM Orders
+            JOIN Product ON Product.id = Orders.product_id
+            JOIN Product_category ON Product_category.id = Product.category_id
+            GROUP BY Product_category.id, Product_category.category
+            ORDER BY order_count DESC
+            LIMIT 1";
+    $stmt = $pdo->query($sql);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+};
+
+function PopularProduct($pdo) {
+    $sql = "SELECT Product.name AS product_name, COUNT(Orders.id) AS order_count
+            FROM Order
+            JOIN Product ON Product.id = Orders.product_id
+            GROUP BY Product.id, Product.name
+            ORDER BY order_count DESC
+            LIMIT 1";
+    $stmt = $pdo->query($sql);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+};
 

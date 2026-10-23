@@ -60,6 +60,9 @@ $role = $_SESSION['Clients']['role'];
     <h1>Главная страница</h1>
     <p>Пользователь: <b><?php echo $name; ?></b></p>
     <p>Твоя роль: <?php echo $role; ?></p>
+        <br><?php if ($_SESSION['role'] === 'Admin'): ?>
+        <a href="/auth/admin/admin.php" class="btn btn-warning">Перейти в админ-панель</a>
+    <?php endif; ?>
 </div>
 
 </body>
